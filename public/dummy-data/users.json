@@ -1,0 +1,50 @@
+[
+    {
+        "id_user": 12,
+        "username": "username 19",
+        "email": "username19@gmail.com",
+        "nama": "lorem saf aso fopasf aopsf 48",
+        "password": "$2a$12$dMeAP.s5uSrLnLsPeShruunW1YiaWrDp4HsYtjK6xknE7YPHTLMw6",
+        "level": "user"
+    },
+    {
+        "id_user": 20,
+        "username": "username 4",
+        "email": "username4@gmail.com",
+        "nama": "lorem saf aso fopasf aopsf 83",
+        "password": "$2a$12$dMeAP.s5uSrLnLsPeShruunW1YiaWrDp4HsYtjK6xknE7YPHTLMw6",
+        "level": "user"
+    },
+    {
+        "id_user": 20,
+        "username": "username 20",
+        "email": "username20@gmail.com",
+        "nama": "lorem saf aso fopasf aopsf 17",
+        "password": "$2a$12$dMeAP.s5uSrLnLsPeShruunW1YiaWrDp4HsYtjK6xknE7YPHTLMw6",
+        "level": "user"
+    },
+    {
+        "id_user": 1,
+        "username": "username 14",
+        "email": "username14@gmail.com",
+        "nama": "lorem saf aso fopasf aopsf 52",
+        "password": "$2a$12$dMeAP.s5uSrLnLsPeShruunW1YiaWrDp4HsYtjK6xknE7YPHTLMw6",
+        "level": "user"
+    },
+    {
+        "id_user": 18,
+        "username": "username 2",
+        "email": "username2@gmail.com",
+        "nama": "lorem saf aso fopasf aopsf 64",
+        "password": "$2a$12$dMeAP.s5uSrLnLsPeShruunW1YiaWrDp4HsYtjK6xknE7YPHTLMw6",
+        "level": "user"
+    },
+    {
+        "id_user": 18,
+        "username": "username 1",
+        "email": "username1@gmail.com",
+        "nama": "lorem saf aso fopasf aopsf 66",
+        "password": "$2a$12$dMeAP.s5uSrLnLsPeShruunW1YiaWrDp4HsYtjK6xknE7YPHTLMw6",
+        "level": "user"
+    }
+]
