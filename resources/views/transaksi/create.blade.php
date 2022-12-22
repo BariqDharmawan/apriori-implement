@@ -1,0 +1,52 @@
+@extends('layouts.master')
+
+@section('content')
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0"></h5>
+                <a href="transaksi.php"><span class="text-white float-end btn btn-primary fs-22">Kembali</span></a>
+            </div>
+            <div class="card-body">
+
+                <form action="{{ route('transaksi.store') }}" method="POST">
+                    @csrf
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">ID Produk</label>
+                        <select name="id_produk" class="form-control">
+                            @foreach ($produk as $pd)
+                                <option value="{{ $pd['id_produk'] }}">
+                                    {{ $pd['id_produk'] }} ({{ $pd['nama_produk'] }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Jumlah Produk</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="jumlah_produk" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Tanggal Transaksi</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" name="tgl_transaksi" required>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row justify-content-end">
+                        <div class="col-sm-10">
+                            <button type="submit" name="tambah" class="btn btn-primary">Tambah</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+@endsection
