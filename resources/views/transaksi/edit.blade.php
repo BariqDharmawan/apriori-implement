@@ -9,37 +9,43 @@
             </div>
             <div class="card-body">
 
-                <form action="{{ route('transaksi.store') }}" method="POST">
-                    @csrf
+                <form action="{{ route('transaksi.update', $transaksi->id) }}" method="POST">
+                    @csrf @method('PUT')
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">ID Produk</label>
                         <select name="produks_id" class="form-control">
-                            @foreach ($produk as $pd)
-                                <option value="{{ $pd['produks_id'] }}">
+                            @foreach ($produks as $pd)
+                                <option value="{{ $pd['produks_id'] }}" @if ($pd['produks_id'] === $transaksi->produks_id) selected @endif>
                                     {{ $pd['produks_id'] }} ({{ $pd['nama_produk'] }})
                                 </option>
                             @endforeach
+
+                            <option value="{{ $transaksi['produks_id'] }}">{{ $transaksi['produks_id'] }}</option>
                         </select>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Jumlah Produk</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" name="jumlah_produk" required>
+                            <input type="number" class="form-control" name="jumlah_produk"
+                                value="{{ $transaksi['jumlah_produk'] }}" required>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Tanggal Transaksi</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" name="tgl_transaksi" required>
+                            <input type="date" class="form-control" name="tgl_transaksi"
+                                value="{{ date('Y-m-d', strtotime($transaksi['tgl_transaksi'])) }}" required>
                         </div>
                     </div>
 
+
+
                     <div class="row justify-content-end">
                         <div class="col-sm-10">
-                            <button type="submit" name="tambah" class="btn btn-primary">Tambah</button>
+                            <button type="submit" name="edit" class="btn btn-primary">Edit</button>
                         </div>
                     </div>
                 </form>

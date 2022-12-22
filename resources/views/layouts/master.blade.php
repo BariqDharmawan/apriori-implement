@@ -99,30 +99,22 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="index.php" class="menu-link">
+                                <a href="{{ route('produk.index') }}" class="menu-link">
                                     <div data-i18n="Account">Produk</div>
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-
-                    <!-- JADWAL PARTAI -->
-                    <li class="menu-item mb-2">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-collection"></i>
-                            <div data-i18n="Account Settings">Rekomendasi Produk</div>
-                        </a>
-                        <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="#" class="menu-link">
-                                    <div data-i18n="Account">Apriori</div>
+                                <a href="{{ route('transaksi.index') }}" class="menu-link">
+                                    <div data-i18n="Notifications">Transaksi</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="#" class="menu-link">
-                                    <div data-i18n="Notifications">FP Growth</div>
-                                </a>
-                            </li>
+                            @if (auth()->user()->role === 'admin')
+                                <li class="menu-item">
+                                    <a href="{{ route('akun.index') }}" class="menu-link">
+                                        <div data-i18n="Notifications">admin / user</div>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
 

@@ -23,28 +23,29 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    {{-- @foreach ($transaksi as $td)
+                    @foreach ($transaksi as $td)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
 
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->id_produk }}</td>
+                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->produks_id }}</td>
                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->jumlah_produk }}</td>
                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
                                 {{ date('d M Y', strtotime($td->tgl_transaksi)) }}
                             </td>
 
                             <td style="display: block;">
-                                <a class="btn btn-primary m-2"
-                                    href="edit_transaksi.php?id_transaksi={{ $td->id_transaksi }}">
+                                <a class="btn btn-primary m-2" href="{{ route('transaksi.edit', $td->id) }}">
                                     <i class="bx bx-edit-alt me-1 text-white"></i>
                                 </a>
-                                <a class="btn btn-danger" href="hapus_transaksi.php?id_transaksi={{ $td->id_transaksi }}"
-                                    onclick="return confirm('Yakin ingin menghapus transaksi ini ?')">
-                                    <i class="bx bx-trash me-1 text-white"></i>
-                                </a>
+                                <form action="{{ route('transaksi.destroy', $td->id) }}"
+                                    onsubmit="return confirm('Yakin ingin menghapus transaksi ini ?')">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="bx bx-trash me-1 text-white"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

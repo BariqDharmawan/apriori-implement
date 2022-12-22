@@ -14,7 +14,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        return view('produk.index');
+        return view('produk.index', ['produks' => Produk::all()]);
     }
 
     /**
@@ -36,7 +36,9 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         Produk::create([
-            'nama' => $request->nama
+            'gambar' => 'https://cdn.pixabay.com/photo/2014/02/01/17/30/apple-256268_960_720.jpg',
+            'nama_produk' => $request->nama_produk,
+            'harga' => $request->harga,
         ]);
 
         return redirect('produk');
@@ -74,7 +76,9 @@ class ProdukController extends Controller
     public function update(Request $request, Produk $produk)
     {
         $produk->update([
-            'nama' => $request->nama
+            'gambar' => 'https://cdn.pixabay.com/photo/2014/02/01/17/30/apple-256268_960_720.jpg',
+            'nama_produk' => $request->nama_produk,
+            'harga' => $request->harga,
         ]);
 
         return redirect('produk');

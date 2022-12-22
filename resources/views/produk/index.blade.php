@@ -11,6 +11,11 @@
                 <div class="col-6">
                     <button type="submit" class="btn btn-primary" name="search">Cari</button>
                 </div>
+                @if (auth()->user()->role === 'admin')
+                    <div class="col">
+                        <a href="{{ route('produk.create') }}" class="btn btn-warning">Tambah</a>
+                    </div>
+                @endif
             </div>
         </div>
     </form>
@@ -31,28 +36,41 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    {{-- @foreach ($produks as $produk)
+                    @foreach ($produks as $produk)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><img src="{{ asset('assets/img/' . $produk->gambar) }}" style="width: 100px; height : 100px"></td>
+                            <td><img src="{{ $produk->gambar }}" style="width: 100px; height : 100px"></td>
                             <td>
                                 <i class="fab fa-angular fa-lg text-danger me-3"></i>
                                 {{ $produk->nama_produk }}
                             </td>
                             <td class="text-end">
-                                <p>
-                                    <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                    Rp {{ number_format($produk->harga, 0) }}
-                                </p>
-                                <form action="addCart.php" method="post">
-                                    <button type="submit" name="id_produk" value="{{ $produk->id_produk }}"
-                                        class="btn btn-success">
-                                        Add to cart
-                                    </button>
-                                </form>
+                                @if (auth()->user()->role === 'admin')
+                                    <a class="btn btn-primary m-2" href="{{ route('produk.edit', $produk->id) }}">
+                                        <i class="bx bx-edit-alt me-1 text-white"></i>
+                                    </a>
+                                    <form method="POST" action="{{ route('produk.destroy', $produk->id) }}"
+                                        onsubmit="return confirm('Yakin ingin menghapus' . $produk['nama_produk'] . '?')">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-danger" type="submit">
+                                            <i class="bx bx-trash me-1 text-white"></i>
+                                        </button>
+                                    </form>
+                                @else
+                                    <p>
+                                        <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                        Rp {{ number_format($produk->harga, 0) }}
+                                    </p>
+                                    <form action="addCart.php" method="post">
+                                        <button type="submit" name="produks_id" value="{{ $produk->produks_id }}"
+                                            class="btn btn-success">
+                                            Add to cart
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

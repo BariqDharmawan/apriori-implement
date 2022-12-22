@@ -26,4 +26,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('produk', ProdukController::class)->middleware('auth');
 Route::resource('transaksi', TransaksiController::class)->middleware('auth');
-Route::resource('user', UserController::class)->middleware('auth');
+Route::resource('akun', UserController::class)->middleware('auth');
