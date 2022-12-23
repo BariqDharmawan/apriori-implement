@@ -118,12 +118,12 @@
                         </ul>
                     </li>
 
-                    <li class="menu-item mb-2">
+                    {{-- <li class="menu-item mb-2">
                         <a href="{{ route('cart.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Basic">Cart</div>
                         </a>
-                    </li>
+                    </li> --}}
 
                 </ul>
             </aside>
