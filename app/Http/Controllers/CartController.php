@@ -14,17 +14,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('transaksi.cart');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('transaksi.cart', ['carts' => Cart::where('user_id', auth()->id())->get()]);
     }
 
     /**
@@ -35,29 +25,13 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Cart::create([
+            'qty' => $request->qty,
+            'user_id' => auth()->id(),
+            'produks_id' => $request->produks_id
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -80,6 +54,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::find($id)->delete();
+        return redirect()->route('cart.index');
     }
 }

@@ -61,7 +61,10 @@
                                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
                                         Rp {{ number_format($produk->harga, 0) }}
                                     </p>
-                                    <form action="addCart.php" method="post">
+                                    <form action="{{ route('cart.store') }}" method="post">
+                                        @csrf
+                                        <input type="number" placeholder="QTY" min="1" name="qty" value="1"
+                                            required>
                                         <button type="submit" name="produks_id" value="{{ $produk->id }}"
                                             class="btn btn-success">
                                             Add to cart

@@ -19,8 +19,9 @@ class CartFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::where('role', '!=', 'admin')->inRandomOrder()->get()->pluck('id'),
-            'produks_id' => Produk::inRandomOrder()->get()->pluck('id'),
+            'user_id' => User::where('role', '!=', 'admin')->inRandomOrder()->get()->pluck('id')->first(),
+            'produks_id' => Produk::inRandomOrder()->get()->pluck('id')->first(),
+            'qty' => rand(1, 10)
         ];
     }
 }

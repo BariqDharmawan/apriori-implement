@@ -8,16 +8,25 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Gambar</th>
                     <th>Produk Name</th>
+                    <th>QTY</th>
                     <th>Tanggal Ditambahkan</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($carts as $cart)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>
+                            <img src="{{ $cart->produk->gambar }}" alt="" srcset=""
+                                style="width: 100px; height: 100px">
+                        </td>
+                        <td>{{ $cart->produk->nama_produk }}</td>
+                        <td>{{ $cart->qty }}</td>
+                        <td>{{ $cart->created_at->format('d M Y H:i') }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
