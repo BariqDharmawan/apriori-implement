@@ -103,12 +103,12 @@
                                     <div data-i18n="Account">Produk</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="{{ route('transaksi.index') }}" class="menu-link">
-                                    <div data-i18n="Notifications">Transaksi</div>
-                                </a>
-                            </li>
                             @if (auth()->user()->role === 'admin')
+                                <li class="menu-item">
+                                    <a href="{{ route('transaksi.index') }}" class="menu-link">
+                                        <div data-i18n="Notifications">Transaksi</div>
+                                    </a>
+                                </li>
                                 <li class="menu-item">
                                     <a href="{{ route('akun.index') }}" class="menu-link">
                                         <div data-i18n="Notifications">admin / user</div>

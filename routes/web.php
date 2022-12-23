@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlgoritmaController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
@@ -23,9 +25,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('produk', ProdukController::class)->middleware('auth');
 Route::resource('transaksi', TransaksiController::class)->middleware('auth');
 Route::resource('akun', UserController::class)->middleware('auth');
 Route::resource('cart', CartController::class)->middleware('auth')->except('edit', 'show');
+Route::prefix('algoritma')->name('algoritma.')->group(function () {
+    Route::get('apriori', [AlgoritmaController::class, 'apriori'])->name('apriori');
+});

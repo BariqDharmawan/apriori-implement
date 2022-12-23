@@ -15,7 +15,8 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        return view('transaksi.index', ['transaksi' => Transaksi::all()]);
+        $produks = Produk::all();
+        return view('transaksi.index', ['transaksi' => Transaksi::all(), 'produks' => $produks]);
     }
 
     /**
@@ -54,7 +55,7 @@ class TransaksiController extends Controller
      */
     public function show(Transaksi $transaksi)
     {
-        //
+        return view('transaksi.show', compact('transaksi'));
     }
 
     /**

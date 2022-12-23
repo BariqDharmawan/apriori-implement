@@ -5,7 +5,8 @@
         <div class="col mb-4">
             <a href="{{ route('transaksi.create') }}" class="btn btn-warning">Tambah</a>
         </div>
-    @else
+
+        <a href="{{ route('algoritma.apriori') }}" class="btn btn-info">Lihat Apriori</a>
     @endif
 
     <!-- Basic Bootstrap Table -->
@@ -16,27 +17,25 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>ID Produk</th>
-                        <th>Jumlah Produk</th>
                         <th>Tanggal Transaksi</th>
-                        <th>Aksi</th>
+                        @foreach ($produks as $produk)
+                            <th>Produk {{ $produk->id }}</th>
+                        @endforeach
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @foreach ($transaksi as $td)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->produks_id }}</td>
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->jumlah_produk }}</td>
                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
                                 {{ date('d M Y', strtotime($td->tgl_transaksi)) }}
                             </td>
 
+                            @foreach ($produks as $produk)
+                                <td>Yes</td>
+                            @endforeach
                             <td style="display: block;">
-                                <a class="btn btn-primary m-2" href="{{ route('transaksi.edit', $td->id) }}">
-                                    <i class="bx bx-edit-alt me-1 text-white"></i>
-                                </a>
                                 <form action="{{ route('transaksi.destroy', $td->id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin menghapus transaksi ini ?')">
                                     @csrf @method('DELETE')
