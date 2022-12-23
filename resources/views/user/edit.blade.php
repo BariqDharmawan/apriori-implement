@@ -10,10 +10,8 @@
             </div>
             <div class="card-body">
 
-                <form action="{{ route('akun.update', 1) }}" method="POST">
+                <form action="{{ route('akun.update', $user->id) }}" method="POST">
                     @csrf @method('PUT')
-
-                    <input type="hidden" name="id_user" value="{{ $user['id_user'] }}">
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Username</label>

@@ -16,8 +16,8 @@
                         <label class="col-sm-2 col-form-label">ID Produk</label>
                         <select name="produks_id" class="form-control">
                             @foreach ($produks as $pd)
-                                <option value="{{ $pd['produks_id'] }}" @if ($pd['produks_id'] === $transaksi->produks_id) selected @endif>
-                                    {{ $pd['produks_id'] }} ({{ $pd['nama_produk'] }})
+                                <option value="{{ $pd['id'] }}" @if ($pd['id'] === $transaksi->produks_id) selected @endif>
+                                    {{ $pd['id'] }} ({{ $pd['nama_produk'] }})
                                 </option>
                             @endforeach
 

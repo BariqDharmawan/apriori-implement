@@ -15,19 +15,19 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    {{-- @foreach ($admins as $user)
+                    @foreach ($admins as $user)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
 
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->username }}</td>
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->nama }}</td>
+                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $user->username }}</td>
+                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $user->nama }}</td>
                             <td style="display: block;">
-                                <a class="btn btn-primary m-2" href="edit_admin.php?id_admin={{ $td->id_admin }}">
+                                <a class="btn btn-primary m-2" href="{{ route('akun.edit', $user->id) }}">
                                     <i class="bx bx-edit-alt me-1 text-white"></i>
                                 </a>
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -49,23 +49,27 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    {{-- @foreach ($users as $user)
+                    @foreach ($users as $td)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
 
                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->username }}</td>
                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>{{ $td->nama }}</td>
                             <td style="display: block;">
-                                <a class="btn btn-primary m-2" href="edit_user.php?id_user={{ $td->id_user }}">
+                                <a class="btn btn-primary m-2" href="{{ route('akun.edit', $td->id) }}">
                                     <i class="bx bx-edit-alt me-1 text-white"></i>
                                 </a>
-                                <a class="btn btn-danger" href="hapus_user.php?id_user={{ $td->id_user }}"
-                                    onclick="return confirm('Yakin ingin menghapus {{ $td->nama }} ?')">
-                                    <i class="bx bx-trash me-1 text-white"></i>
-                                </a>
+                                <form action="{{ route('akun.destroy', $td->id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin ingin menghapus {{ $td->nama }} ?')">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="bx bx-trash me-1 text-white"></i>
+                                    </button>
+
+                                </form>
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

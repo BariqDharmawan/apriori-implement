@@ -3,7 +3,7 @@
 @section('content')
     @if (auth()->user()->role === 'admin')
         <div class="col mb-4">
-            <a href="tambah_transaksi.php" class="btn btn-warning">Tambah</a>
+            <a href="{{ route('transaksi.create') }}" class="btn btn-warning">Tambah</a>
         </div>
     @else
     @endif
@@ -37,8 +37,9 @@
                                 <a class="btn btn-primary m-2" href="{{ route('transaksi.edit', $td->id) }}">
                                     <i class="bx bx-edit-alt me-1 text-white"></i>
                                 </a>
-                                <form action="{{ route('transaksi.destroy', $td->id) }}"
+                                <form action="{{ route('transaksi.destroy', $td->id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin menghapus transaksi ini ?')">
+                                    @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger">
                                         <i class="bx bx-trash me-1 text-white"></i>
                                     </button>

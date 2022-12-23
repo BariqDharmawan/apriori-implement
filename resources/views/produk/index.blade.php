@@ -62,7 +62,7 @@
                                         Rp {{ number_format($produk->harga, 0) }}
                                     </p>
                                     <form action="addCart.php" method="post">
-                                        <button type="submit" name="produks_id" value="{{ $produk->produks_id }}"
+                                        <button type="submit" name="produks_id" value="{{ $produk->id }}"
                                             class="btn btn-success">
                                             Add to cart
                                         </button>

@@ -38,10 +38,12 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         Transaksi::create([
-            'nama' => $request->nama
+            'produks_id' => $request->produks_id,
+            'jumlah_produk' => $request->jumlah_produk,
+            'tgl_transaksi' => $request->tgl_transaksi
         ]);
 
-        return redirect('produk');
+        return redirect('transaksi');
     }
 
     /**
