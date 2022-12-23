@@ -1,37 +1,37 @@
 [
     {
-        "id_transaksi": 111,
-        "id_produk": 65,
+        "id": 111,
+        "produks_id": 65,
         "jumlah_produk": 31,
         "tgl_transaksi": "2019-07-08T11:55:43 -07:00"
     },
     {
-        "id_transaksi": 64,
-        "id_produk": 20,
+        "id": 64,
+        "produks_id": 20,
         "jumlah_produk": 34,
         "tgl_transaksi": "2018-11-23T02:57:19 -07:00"
     },
     {
-        "id_transaksi": 173,
-        "id_produk": 61,
+        "id": 173,
+        "produks_id": 61,
         "jumlah_produk": 20,
         "tgl_transaksi": "2019-11-16T12:15:11 -07:00"
     },
     {
-        "id_transaksi": 194,
-        "id_produk": 18,
+        "id": 194,
+        "produks_id": 18,
         "jumlah_produk": 30,
         "tgl_transaksi": "2018-08-16T08:34:18 -07:00"
     },
     {
-        "id_transaksi": 18,
-        "id_produk": 50,
+        "id": 18,
+        "produks_id": 50,
         "jumlah_produk": 32,
         "tgl_transaksi": "2017-11-06T11:37:34 -07:00"
     },
     {
-        "id_transaksi": 110,
-        "id_produk": 96,
+        "id": 110,
+        "produks_id": 96,
         "jumlah_produk": 29,
         "tgl_transaksi": "2017-05-08T07:13:49 -07:00"
     }
