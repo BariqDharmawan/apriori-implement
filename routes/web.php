@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
@@ -27,3 +28,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('produk', ProdukController::class)->middleware('auth');
 Route::resource('transaksi', TransaksiController::class)->middleware('auth');
 Route::resource('akun', UserController::class)->middleware('auth');
+Route::resource('cart', CartController::class)->middleware('auth');
