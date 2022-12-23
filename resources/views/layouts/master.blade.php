@@ -119,7 +119,7 @@
                     </li>
 
                     <li class="menu-item mb-2">
-                        <a href="../cart/index.php" class="menu-link">
+                        <a href="{{ route('cart.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Basic">Cart</div>
                         </a>

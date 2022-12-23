@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -14,7 +15,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('transaksi.cart', ['carts' => Cart::where('user_id', auth()->id())->get()]);
+        $apriori = Produk::all();
+        return view('transaksi.cart', ['carts' => Cart::where('user_id', auth()->id())->get(), 'apriori' => $apriori]);
     }
 
     /**
