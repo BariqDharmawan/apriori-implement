@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ProdukSeeder::class,
             TransaksiSeeder::class,
+            TransaksiItemSeeder::class,
             CartSeeder::class
         ]);
     }

@@ -1,32 +1,26 @@
 [
     {
         "id": 1,
-        "transaksi_item": 5,
         "tgl_transaksi": "2019-07-08T11:55:43 -07:00"
     },
     {
         "id": 2,
-        "transaksi_item": 2,
         "tgl_transaksi": "2018-11-23T02:57:19 -07:00"
     },
     {
         "id": 3,
-        "transaksi_item": 1,
         "tgl_transaksi": "2019-11-16T12:15:11 -07:00"
     },
     {
         "id": 4,
-        "transaksi_item": 3,
         "tgl_transaksi": "2018-08-16T08:34:18 -07:00"
     },
     {
         "id": 5,
-        "transaksi_item": 4,
         "tgl_transaksi": "2017-11-06T11:37:34 -07:00"
     },
     {
         "id": 6,
-        "transaksi_item": 5,
         "tgl_transaksi": "2017-05-08T07:13:49 -07:00"
     }
 ]
