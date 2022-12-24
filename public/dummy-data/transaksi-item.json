@@ -1,23 +1,13 @@
 [
     {
         "id": "1",
-        "produks_id": 5,
-        "transaksis_id": 6
+        "produks_id": 1,
+        "transaksis_id": 1
     },
     {
         "id": "1",
-        "produks_id": 5,
-        "transaksis_id": 6
-    },
-    {
-        "id": "1",
-        "produks_id": 5,
-        "transaksis_id": 4
-    },
-    {
-        "id": "1",
-        "produks_id": 5,
-        "transaksis_id": 3
+        "produks_id": 3,
+        "transaksis_id": 1
     },
     {
         "id": "1",
@@ -27,6 +17,76 @@
     {
         "id": "1",
         "produks_id": 5,
+        "transaksis_id": 2
+    },
+    {
+        "id": "1",
+        "produks_id": 2,
+        "transaksis_id": 2
+    },
+    {
+        "id": "1",
+        "produks_id": 3,
+        "transaksis_id": 2
+    },
+    {
+        "id": "1",
+        "produks_id": 1,
+        "transaksis_id": 2
+    },
+    {
+        "id": "1",
+        "produks_id": 3,
+        "transaksis_id": 3
+    },
+    {
+        "id": "1",
+        "produks_id": 4,
+        "transaksis_id": 3
+    },
+    {
+        "id": "1",
+        "produks_id": 5,
+        "transaksis_id": 4
+    },
+    {
+        "id": "1",
+        "produks_id": 2,
+        "transaksis_id": 4
+    },
+    {
+        "id": "1",
+        "produks_id": 1,
+        "transaksis_id": 4
+    },
+    {
+        "id": "1",
+        "produks_id": 4,
+        "transaksis_id": 4
+    },
+    {
+        "id": "1",
+        "produks_id": 2,
         "transaksis_id": 5
+    },
+    {
+        "id": "1",
+        "produks_id": 3,
+        "transaksis_id": 5
+    },
+    {
+        "id": "1",
+        "produks_id": 4,
+        "transaksis_id": 5
+    },
+    {
+        "id": "1",
+        "produks_id": 3,
+        "transaksis_id": 6
+    },
+    {
+        "id": "1",
+        "produks_id": 4,
+        "transaksis_id": 6
     }
 ]
