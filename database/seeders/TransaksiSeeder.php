@@ -19,8 +19,6 @@ class TransaksiSeeder extends Seeder
         $transaksis = json_decode(File::get('public/dummy-data/transactions.json'));
         foreach ($transaksis as $transaksi) {
             Transaksi::create([
-                'produks_id' => $transaksi->produks_id,
-                'jumlah_produk' => $transaksi->jumlah_produk,
                 'tgl_transaksi' => $transaksi->tgl_transaksi
             ]);
         }
