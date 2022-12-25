@@ -16,14 +16,14 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @for ($i = 0; $i < 4; $i++)
+                    @foreach ($apriories as $apriory)
                         <tr>
-                            <td>{{ $i + 1 }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ implode(', ', $apriory['if']) }}</td>
+                            <td>{{ implode(', ', $apriory['then']) }}</td>
+                            <td>{{ $apriory['confidence'] * 100 . '%' }}</td>
                         </tr>
-                    @endfor
+                    @endforeach
                 </tbody>
             </table>
         </div>
