@@ -1,30 +1,65 @@
 [
     {
-        "id": 1,
         "nama_produk": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
         "harga": 100000,
         "gambar": "produk.png"
     },
     {
-        "id": 2,
         "nama_produk": "qui est esse",
         "harga": 100000,
         "gambar": "produk.png"
     },
     {
-        "id": 3,
         "nama_produk": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
         "harga": 100000,
         "gambar": "produk.png"
     },
     {
-        "id": 4,
         "nama_produk": "eum et est occaecati",
         "harga": 100000,
         "gambar": "produk.png"
     },
     {
-        "id": 5,
+        "nama_produk": "nesciunt quas odio",
+        "harga": 100000,
+        "gambar": "produk.png"
+    },
+    {
+        "nama_produk": "nesciunt quas odio",
+        "harga": 100000,
+        "gambar": "produk.png"
+    },
+    {
+        "nama_produk": "nesciunt quas odio",
+        "harga": 100000,
+        "gambar": "produk.png"
+    },
+    {
+        "nama_produk": "nesciunt quas odio",
+        "harga": 100000,
+        "gambar": "produk.png"
+    },
+    {
+        "nama_produk": "nesciunt quas odio",
+        "harga": 100000,
+        "gambar": "produk.png"
+    },
+    {
+        "nama_produk": "nesciunt quas odio",
+        "harga": 100000,
+        "gambar": "produk.png"
+    },
+    {
+        "nama_produk": "nesciunt quas odio",
+        "harga": 100000,
+        "gambar": "produk.png"
+    },
+    {
+        "nama_produk": "nesciunt quas odio",
+        "harga": 100000,
+        "gambar": "produk.png"
+    },
+    {
         "nama_produk": "nesciunt quas odio",
         "harga": 100000,
         "gambar": "produk.png"

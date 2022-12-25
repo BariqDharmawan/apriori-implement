@@ -19,9 +19,26 @@
                     @foreach ($apriories as $apriory)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ implode(', ', $apriory['if']) }}</td>
-                            <td>{{ implode(', ', $apriory['then']) }}</td>
-                            <td>{{ $apriory['confidence'] * 100 . '%' }}</td>
+                            <td>
+                                <ol class="m-0">
+                                    @foreach ($apriory['if'] as $itemIf)
+                                        <li>
+                                            {{ $itemIf->nama_produk }} {{ !$loop->last ? ',' : '' }}
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </td>
+                            <td>
+                                <ol class="m-0">
+                                    @foreach ($apriory['then'] as $itemThen)
+                                        <li>
+                                            {{ $itemThen->nama_produk }}
+                                            {{ !$loop->last ? ',' : '' }}
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </td>
+                            <td>{{ $apriory['confidence'] }}</td>
                         </tr>
                     @endforeach
                 </tbody>
