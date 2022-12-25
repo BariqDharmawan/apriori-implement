@@ -3,7 +3,6 @@
 namespace App\Lib;
 
 use Illuminate\Support\Collection;
-use PhpParser\Node\Expr\Cast\Double;
 
 $iteration = [
     [
