@@ -12,10 +12,11 @@ class AlgoritmaController extends Controller
     public function apriori()
     {
         // dd(TransaksiItem::get()->groupBy("transaksis_id")->first()->pluck("produks_id"));
-        $apriori = new Apriori(4, 50);
+        $apriori = new Apriori(2, 0.7);
+        // dd(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->importData(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->iterate();
-        dd("ok");
+        dd($apriori->generateRules());
         return view('algoritma.apriori');
     }
 }
