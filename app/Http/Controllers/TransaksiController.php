@@ -16,8 +16,9 @@ class TransaksiController extends Controller
      */
     public function index()
     {
+        $transaksi = Transaksi::latest()->get();
         $produks = Produk::all();
-        return view('transaksi.index', ['transaksi' => Transaksi::latest()->get(), 'produks' => $produks]);
+        return view('transaksi.index', ['transaksi' => $transaksi, 'produks' => $produks]);
     }
 
     /**
