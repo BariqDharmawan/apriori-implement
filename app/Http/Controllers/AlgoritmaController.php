@@ -13,7 +13,7 @@ class AlgoritmaController extends Controller
     public function apriori()
     {
         // dd(TransaksiItem::get()->groupBy("transaksis_id")->first()->pluck("produks_id"));
-        $apriori = new Apriori(2, 0.3);
+        $apriori = new Apriori(2, 0.7);
         // dd(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->importData(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->iterate();
@@ -33,6 +33,7 @@ class AlgoritmaController extends Controller
             ];
         });
 
+        dd($modApriories);
 
         return view('algoritma.apriori', ['apriories' => $modApriories]);
     }

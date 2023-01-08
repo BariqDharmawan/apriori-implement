@@ -34,3 +34,4 @@ Route::resource('cart', CartController::class)->middleware('auth')->except('edit
 Route::prefix('algoritma')->name('algoritma.')->group(function () {
     Route::get('apriori', [AlgoritmaController::class, 'apriori'])->name('apriori');
 });
+

@@ -6,6 +6,8 @@ use App\Models\Produk;
 use App\Models\Transaksi;
 use App\Models\TransaksiItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Shuchkin\SimpleXLSX;
 
 class TransaksiController extends Controller
 {
@@ -104,5 +106,42 @@ class TransaksiController extends Controller
     {
         $transaksi->delete();
         return redirect('transaksi');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'data' => 'file|required'
+        ]);
+
+        $filename = str(time()).".xlsx";
+        $path = $request->file('data')->storeAs('public/files/excel', $filename);
+        $xlsx = SimpleXLSX::parse('storage/files/excel/'.$filename);
+
+        $temp = $xlsx->rowsEx();
+
+        foreach ($temp as $idx => $item) {
+            if ($idx == 0) {
+                continue;
+            }
+            $trx = Transaksi::create([
+                "tgl_transaksi" => $item[0]['value'],
+            ]); 
+            
+            $produkIds = explode('-',$item[1]['value']);
+            $produkJumlah = explode('-',$item[2]['value']);
+
+            foreach ($produkIds as $idx => $val) {
+                TransaksiItem::create([
+                    'transaksis_id' => $trx->id,
+                    'produks_id' => $val,
+                    'jumlah_produk' => $produkJumlah[$idx],
+                ]);
+            }
+        }
+
+        Storage::delete($path);
+
+        return 'sukses bangsat';
     }
 }
