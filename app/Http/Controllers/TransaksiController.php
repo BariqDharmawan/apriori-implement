@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\Transaksi;
+use App\Models\TransaksiItem;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
@@ -16,7 +17,7 @@ class TransaksiController extends Controller
     public function index()
     {
         $produks = Produk::all();
-        return view('transaksi.index', ['transaksi' => Transaksi::all(), 'produks' => $produks]);
+        return view('transaksi.index', ['transaksi' => Transaksi::latest()->get(), 'produks' => $produks]);
     }
 
     /**
@@ -38,10 +39,14 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        Transaksi::create([
-            'produks_id' => $request->produks_id,
-            'jumlah_produk' => $request->jumlah_produk,
+        $transaksi = Transaksi::create([
             'tgl_transaksi' => $request->tgl_transaksi
+        ]);
+
+        TransaksiItem::create([
+            'jumlah_produk' => $request->jumlah_produk,
+            'produks_id' => $request->produks_id,
+            'transaksis_id' => $transaksi->id
         ]);
 
         return redirect('transaksi');

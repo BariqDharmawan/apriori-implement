@@ -1,74 +1,92 @@
 [
     {
         "produks_id": 1,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 2,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 3,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 4,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 5,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 6,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 7,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 8,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 9,
+        "jumlah_produk": 2,
         "transaksis_id": 1
     },
     {
         "produks_id": 1,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     },
     {
         "produks_id": 2,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     },
     {
         "produks_id": 3,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     },
     {
         "produks_id": 4,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     },
     {
         "produks_id": 5,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     },
     {
         "produks_id": 6,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     },
     {
         "produks_id": 7,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     },
     {
         "produks_id": 8,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     },
     {
         "produks_id": 9,
+        "jumlah_produk": 2,
         "transaksis_id": 2
     }
 ]

@@ -20,6 +20,7 @@ class TransaksiItemSeeder extends Seeder
         foreach ($produks as $produk) {
             TransaksiItem::create([
                 'produks_id' => $produk->produks_id,
+                'jumlah_produk' => $produk->jumlah_produk,
                 'transaksis_id' => $produk->transaksis_id
             ]);
         }

@@ -9,6 +9,8 @@ class TransaksiItem extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function produk()
     {
         return $this->hasOne(Produk::class, "produks_id");
