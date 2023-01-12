@@ -7,7 +7,7 @@
         </div>
 
         <a href="{{ route('algoritma.apriori') }}" class="btn btn-info">Lihat Apriori</a>
-        <a href="{{ route('transaksi.import') }}" class="btn btn-info">Import Transaksi</a>
+        <a href="{{ route('transaksi.import.index') }}" class="btn btn-info">Import Transaksi</a>
     @endif
 
     <!-- Basic Bootstrap Table -->

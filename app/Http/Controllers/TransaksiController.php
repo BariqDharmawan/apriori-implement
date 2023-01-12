@@ -116,14 +116,13 @@ class TransaksiController extends Controller
     public function import(Request $request)
     {
         $request->validate([
-            'file_excel' => 'required'
+            'file_excel' => 'file|required'
         ]);
 
         $filename = str(time()) . ".xlsx";
         $path = $request->file('file_excel')->storeAs('public/files/excel', $filename);
         $xlsx = SimpleXLSX::parse('storage/files/excel/' . $filename);
 
-        dd($xlsx);
         $temp = $xlsx->rowsEx();
 
         foreach ($temp as $idx => $item) {
@@ -148,6 +147,6 @@ class TransaksiController extends Controller
 
         Storage::delete($path);
 
-        return 'success';
+        return 'sukses bangsat';
     }
 }
