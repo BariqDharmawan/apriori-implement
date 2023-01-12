@@ -108,16 +108,22 @@ class TransaksiController extends Controller
         return redirect('transaksi');
     }
 
+    public function viewImport()
+    {
+        return view('transaksi.import');
+    }
+
     public function import(Request $request)
     {
         $request->validate([
-            'data' => 'file|required'
+            'file_excel' => 'required'
         ]);
 
-        $filename = str(time()).".xlsx";
-        $path = $request->file('data')->storeAs('public/files/excel', $filename);
-        $xlsx = SimpleXLSX::parse('storage/files/excel/'.$filename);
+        $filename = str(time()) . ".xlsx";
+        $path = $request->file('file_excel')->storeAs('public/files/excel', $filename);
+        $xlsx = SimpleXLSX::parse('storage/files/excel/' . $filename);
 
+        dd($xlsx);
         $temp = $xlsx->rowsEx();
 
         foreach ($temp as $idx => $item) {
@@ -126,10 +132,10 @@ class TransaksiController extends Controller
             }
             $trx = Transaksi::create([
                 "tgl_transaksi" => $item[0]['value'],
-            ]); 
-            
-            $produkIds = explode('-',$item[1]['value']);
-            $produkJumlah = explode('-',$item[2]['value']);
+            ]);
+
+            $produkIds = explode('-', $item[1]['value']);
+            $produkJumlah = explode('-', $item[2]['value']);
 
             foreach ($produkIds as $idx => $val) {
                 TransaksiItem::create([
@@ -142,6 +148,6 @@ class TransaksiController extends Controller
 
         Storage::delete($path);
 
-        return 'sukses bangsat';
+        return 'success';
     }
 }
