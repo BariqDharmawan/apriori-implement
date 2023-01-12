@@ -16,13 +16,6 @@ class TransaksiItemSeeder extends Seeder
      */
     public function run()
     {
-        $produks = json_decode(File::get('public/dummy-data/transaksi-item.json'));
-        foreach ($produks as $produk) {
-            TransaksiItem::create([
-                'produks_id' => $produk->produks_id,
-                'jumlah_produk' => $produk->jumlah_produk,
-                'transaksis_id' => $produk->transaksis_id
-            ]);
-        }
+        TransaksiItem::factory()->count(500)->create();
     }
 }

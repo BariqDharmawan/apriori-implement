@@ -16,11 +16,6 @@ class TransaksiSeeder extends Seeder
      */
     public function run()
     {
-        $transaksis = json_decode(File::get('public/dummy-data/transactions.json'));
-        foreach ($transaksis as $transaksi) {
-            Transaksi::create([
-                'tgl_transaksi' => $transaksi->tgl_transaksi
-            ]);
-        }
+        Transaksi::factory()->count(100)->create();
     }
 }

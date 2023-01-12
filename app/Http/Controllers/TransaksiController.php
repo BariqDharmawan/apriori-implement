@@ -18,7 +18,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksi = Transaksi::latest()->get();
+        $transaksi = Transaksi::with('transaksiItems')->latest()->get();
         $produks = Produk::all();
         return view('transaksi.index', ['transaksi' => $transaksi, 'produks' => $produks]);
     }
@@ -147,6 +147,6 @@ class TransaksiController extends Controller
 
         Storage::delete($path);
 
-        return 'sukses bangsat';
+        return redirect()->route('transaksi.index')->with('success', 'Success import excel');
     }
 }

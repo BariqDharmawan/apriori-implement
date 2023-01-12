@@ -4,7 +4,8 @@ namespace App\Lib;
 
 use Illuminate\Support\Collection;
 
-class Apriori2 {
+class Apriori2
+{
     public float $minConf;
     public int $minSuppCount, $dataCount, $index;
     public array $data, $table, $rules, $filtredRules;
@@ -14,10 +15,12 @@ class Apriori2 {
     {
         $this->minConf = $minConf;
         $this->minSuppCount = $minSuppCount;
+        $this->rules = [];
     }
 
-    public function importData(Collection $data) {
-        
+    public function importData(Collection $data)
+    {
+
         $data = $data->filter(function ($val, $key) {
             return $val->count() > 1;
         });
@@ -29,7 +32,7 @@ class Apriori2 {
             $temp[] = $value->pluck("produks_id")->toArray();
         }
         $this->data = $temp;
-        $this->dataCount = count($data); 
+        $this->dataCount = count($data);
         $this->table = array();
     }
 
@@ -48,7 +51,7 @@ class Apriori2 {
                     $frequentItems["$val"] = $this->calcFreqItems($val);
                 }
             }
-            
+
             // dump($frequentItems);
             // filter frequentItems with minSuppCount
             $frequentItems = array_filter($frequentItems, function ($v) {
@@ -84,7 +87,8 @@ class Apriori2 {
         // dd($this->table);
     }
 
-    public function calcFreqItems(int | array $val) : int {
+    public function calcFreqItems(int | array $val): int
+    {
         $count = 0;
         if (is_array($val)) {
             foreach ($this->data as $item) {
@@ -99,11 +103,11 @@ class Apriori2 {
                 }
             }
         }
-        
+
         return $count;
     }
 
-    public function findSupport($arr) : int
+    public function findSupport($arr): int
     {
         $key = implode('-', $arr);
         foreach ($this->table[count($arr) - 1] as $k => $v) {
@@ -117,8 +121,8 @@ class Apriori2 {
         $tableCount = count($this->table);
 
         foreach ($this->table[$tableCount - 1] as $item  => $suppCount) {
-            for ($i=1; $i < $tableCount; $i++) { 
-                $itemset = explode('-',$item);
+            for ($i = 1; $i < $tableCount; $i++) {
+                $itemset = explode('-', $item);
                 foreach (new Combinations($itemset, $i) as $arr) {
                     $then = array_diff($itemset, $arr);
 
@@ -142,7 +146,4 @@ class Apriori2 {
             return $v["confidence"] >= $this->minConf;
         });
     }
-
-
-
 }

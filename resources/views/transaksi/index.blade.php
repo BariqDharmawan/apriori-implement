@@ -10,6 +10,12 @@
         <a href="{{ route('transaksi.import.index') }}" class="btn btn-info">Import Transaksi</a>
     @endif
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <!-- Basic Bootstrap Table -->
     <div class="card">
         <h5 class="card-header bg-primary text-white">Data Transaksi</h5>
@@ -34,7 +40,8 @@
                             </td>
 
                             @foreach ($produks as $produk)
-                                <td>Yes</td>
+                                <td>{{ $td->transaksiItems->where('produks_id', $produk->id)->count() > 0 ? 'Yes' : 'No' }}
+                                </td>
                             @endforeach
                             <td style="display: block;">
                                 <form action="{{ route('transaksi.destroy', $td->id) }}" method="POST"

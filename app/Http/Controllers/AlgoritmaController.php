@@ -15,7 +15,7 @@ class AlgoritmaController extends Controller
     {
         // dd(TransaksiItem::groupBy('transaksis_id')->having('count(1)', '>'));
         // dd(TransaksiItem::get()->groupBy("transaksis_id")->first()->pluck("produks_id"));
-        $apriori = new Apriori2(2, 0.4);
+        $apriori = new Apriori2(1, 0);
         // dd(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->importData(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->iterate();
