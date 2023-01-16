@@ -16,6 +16,8 @@ class AlgoritmaController extends Controller
 
         $apriori->generateRules();
 
+        dd($apriori->getOutput());
+
         $modApriories = array_map(function ($item) {
             return [
                 'if' => Produk::whereIn('id', $item['if'])->get(),

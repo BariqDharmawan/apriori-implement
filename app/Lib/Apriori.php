@@ -6,9 +6,9 @@ use Illuminate\Support\Collection;
 
 class Apriori
 {
-    public float $minConf;
-    public int $minSuppCount, $dataCount, $index;
-    public array $data, $table, $rules, $filtredRules;
+    private float $minConf;
+    private int $minSuppCount, $dataCount, $index;
+    public array $data, $table, $rules, $filtredRules, $output;
 
 
     public function __construct(int $minSuppCount, float $minConf)
@@ -16,6 +16,10 @@ class Apriori
         $this->minConf = $minConf;
         $this->minSuppCount = $minSuppCount;
         $this->rules = [];
+        $this->output = [
+            "minConfidence" => $this->minConf,
+            "minSupportCount" => $this->minSuppCount,
+        ];
     }
 
     public function importData(Collection $data)
@@ -33,6 +37,8 @@ class Apriori
         $this->data = $temp;
         $this->dataCount = count($data);
         $this->table = array();
+        $this->output["transactions"] = $this->data;
+        $this->output["transactionCount"] = $this->dataCount;
     }
 
 
@@ -40,9 +46,15 @@ class Apriori
     {
         $itemIds = array_unique(array_merge(...$this->data));
         $iteration = $itemIds;
+
+        $this->output["productIds"] = $itemIds;
         $this->index = 1;
+
+        // start iteration
         while (true) {
+            $temp = array();
             $frequentItems =  array();
+            
             foreach ($iteration as $val) {
                 if (is_array($val)) {
                     $frequentItems[implode("-", $val)] = $this->calcFreqItems($val);
@@ -50,17 +62,22 @@ class Apriori
                     $frequentItems["$val"] = $this->calcFreqItems($val);
                 }
             }
+            $temp["itemSet"] = $iteration;
+            $temp["frequentItems"] = $frequentItems; 
 
             // filter frequentItems with minSuppCount
             $frequentItems = array_filter($frequentItems, function ($v) {
                 return $v >= $this->minSuppCount;
             });
 
+            $temp["filteredFrequentItems"] = $frequentItems;
+
             // insert frequentItems to table
             if (count($frequentItems) == 0) {
                 break;
             }
             $this->table[] = $frequentItems;
+            $this->output["iteration"][] = $temp;
 
             // update itemIds
             $itemIds = array();
@@ -83,7 +100,7 @@ class Apriori
         }
     }
 
-    public function calcFreqItems(int | array $val): int
+    private function calcFreqItems(int | array $val): int
     {
         $count = 0;
         if (is_array($val)) {
@@ -103,7 +120,7 @@ class Apriori
         return $count;
     }
 
-    public function findSupport($arr): int
+    private function findSupport(array $arr): int
     {
         $key = implode('-', $arr);
         foreach ($this->table[count($arr) - 1] as $k => $v) {
@@ -119,7 +136,7 @@ class Apriori
         foreach ($this->table[$tableCount - 1] as $item  => $suppCount) {
             for ($i = 1; $i < $tableCount; $i++) {
                 $itemset = explode('-', $item);
-                foreach (new Combinations($itemset, $i) as $arr) {
+                foreach (iterator_to_array(new Combinations($itemset, $i),true) as $arr) {
                     $itemsetSupp = $suppCount;
                     $ifSupp = $this->findSupport($arr);
 
@@ -139,5 +156,13 @@ class Apriori
         $this->filtredRules = array_filter($this->rules, function ($v) {
             return $v["confidence"] >= $this->minConf;
         });
+
+        $this->output["rules"] = $this->rules;
+        $this->output["filteredRules"] = $this->filtredRules;
+    }
+
+    public function getOutput() : array
+    {
+        return $this->output;
     }
 }

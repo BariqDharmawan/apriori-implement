@@ -31,7 +31,7 @@ class Combinations implements Iterator
         return $this->pos;
     }
 
-    function current()
+    function current() : array
     {
         $r = array();
         for ($i = 0; $i < $this->k; $i++)
