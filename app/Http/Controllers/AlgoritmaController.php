@@ -10,22 +10,14 @@ class AlgoritmaController extends Controller
 {
     public function apriori()
     {
-        $apriori = new Apriori(1, 0);
+        $apriori = new Apriori(1, 0.1);
         $apriori->importData(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->iterate();
 
         $apriori->generateRules();
 
-        dd($apriori->getOutput());
+        $produk = Produk::whereIn('id', $apriori->getOutput()['productIds'])->get();
 
-        $modApriories = array_map(function ($item) {
-            return [
-                'if' => Produk::whereIn('id', $item['if'])->get(),
-                'then' => Produk::whereIn('id', $item['then'])->get(),
-                'confidence' => $item['confidence'] * 100 . '%',
-            ];
-        }, $apriori->filtredRules);
-
-        return view('algoritma.apriori', ['apriories' => $modApriories]);
+        return view('algoritma.apriori', ['stepByStep' => $apriori->getOutput(), 'produk' => $produk]);
     }
 }
