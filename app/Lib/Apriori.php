@@ -6,147 +6,138 @@ use Illuminate\Support\Collection;
 
 class Apriori
 {
-    private int $minSupport, $dataCount;
-    private float $minConfidence;
-    private int $index = 0;
-    private Collection $data, $iteration, $rules;
+    public float $minConf;
+    public int $minSuppCount, $dataCount, $index;
+    public array $data, $table, $rules, $filtredRules;
 
-    public function __construct(int $minSupport, float $minConfidence)
+
+    public function __construct(int $minSuppCount, float $minConf)
     {
-        $this->minSupport = $minSupport;
-        $this->minConfidence = $minConfidence;
-        $this->iteration = collect();
-        $this->rules = collect();
+        $this->minConf = $minConf;
+        $this->minSuppCount = $minSuppCount;
+        $this->rules = [];
     }
 
     public function importData(Collection $data)
     {
+
         $data = $data->filter(function ($val, $key) {
             return $val->count() > 1;
         });
-        // dd($data);
-        $this->data = $data;
-        $this->dataCount = $data->count();
+
+        $temp = array();
+
+        foreach ($data as $value) {
+            $temp[] = $value->pluck("produks_id")->toArray();
+        }
+        $this->data = $temp;
+        $this->dataCount = count($data);
+        $this->table = array();
     }
+
 
     public function iterate()
     {
-        $itemIdSet = collect();
-
+        $itemIds = array_unique(array_merge(...$this->data));
+        $iteration = $itemIds;
+        $this->index = 1;
         while (true) {
-            // echo($this->index);
-            $iterationItem = collect();
-            if ($this->iteration->count() == 0) {
-                foreach ($this->data as $trx) {
-                    $itemIdSet = $itemIdSet->merge($trx->pluck("produks_id"));
-                }
-                $flattenData = $this->data->flatten();
-                $itemIdSet = $itemIdSet->unique()->values();
-                
-                $itemIdSet->each(function ($item) use ($iterationItem, $flattenData) {
-                    $temp = [
-                        "idSet" => $item,
-                        "supportCount" => $flattenData->where("produks_id", $item)->count()
-                    ];
-                    
-                    $temp["support"] = round($temp["supportCount"] / $this->dataCount, 2);
-                    $iterationItem->push($temp);
-                });
-            } else {
-                // count support
-                foreach ($itemIdSet as $value) {
-                    $temp = [
-                        "idSet" => $value,
-                        "supportCount" => 0
-                    ];
-                    foreach ($this->data as $item) {
-                        $boolTemp = true;
-                        $y = $item->pluck("produks_id")->all();
-
-                        foreach ($value as $x) {
-                            $boolTemp = $boolTemp && in_array($x, $y);
-                        }
-
-                        if ($boolTemp) {
-                            $temp["supportCount"]++;
-                        }
-                    }
-                    $temp["support"] = round($temp["supportCount"] / $this->dataCount, 2);
-                    $iterationItem->push($temp);
+            $frequentItems =  array();
+            foreach ($iteration as $val) {
+                if (is_array($val)) {
+                    $frequentItems[implode("-", $val)] = $this->calcFreqItems($val);
+                } else {
+                    $frequentItems["$val"] = $this->calcFreqItems($val);
                 }
             }
-            $iterationItem = $iterationItem->where("supportCount", ">=", $this->minSupport);
 
-            $this->iteration->push($iterationItem);
-
-            // set new itemset based on prev iteration
-            $itemIdSet = $iterationItem->pluck("idSet")->flatten()->unique()->all();
-
-            // dd($itemIdSet);
-            $temp = $this->data->filter(function ($val, $key) {
-                return $val->count() >= $this->index + 2;
+            // filter frequentItems with minSuppCount
+            $frequentItems = array_filter($frequentItems, function ($v) {
+                return $v >= $this->minSuppCount;
             });
 
-            // dump($temp);
-
-            // if ($this->index == 3) dd(count($temp));
-
-            if (count($temp) == 0) {
+            // insert frequentItems to table
+            if (count($frequentItems) == 0) {
                 break;
             }
+            $this->table[] = $frequentItems;
 
-            $x = collect();
-            foreach (new Combinations($itemIdSet, $this->index + 2) as $arr) {
-                $x->push($arr);
+            // update itemIds
+            $itemIds = array();
+            foreach (array_keys($frequentItems) as $k) {
+                $itemIds =  array_merge($itemIds, array_map('intval', explode("-", $k)));
             }
-            $itemIdSet = $x;
+            $itemIds = array_unique($itemIds);
+
+            // check max combination
+            if ($this->index == count($itemIds)) {
+                break;
+            }
+            // generate new item ids using combination
+            $iteration = array();
+            foreach (new Combinations($itemIds, $this->index + 1) as $arr) {
+                $iteration[] = $arr;
+            }
+
             $this->index++;
         }
     }
 
-    public function generateRules(): Collection
+    public function calcFreqItems(int | array $val): int
     {
-        $item = $this->iteration;
-        $item = $item->last()->pluck("idSet")->flatten()->unique();
-        // dd($item);
-
-        for ($i = 2; $i <= $this->index + 2; $i++) {
-            foreach (new Combinations($item, $i) as $set) {
-                $setCount = $this->index + 2;
-                $rule = collect([
-                    "itemIds" => $set,
-                    "if" => array_slice($set, 0, $setCount - 1),
-                    "then" => array_slice($set, -1, 1),
-                ]);
-
-                $foundSet = $this->findInIteration($set);
-                if (count($foundSet) == 0) {
-                    continue;
+        $count = 0;
+        if (is_array($val)) {
+            foreach ($this->data as $item) {
+                if (array_intersect($item, $val) === $val) {
+                    $count++;
                 }
-                $foundIf = $this->findInIteration((array) $rule["if"]);
-                if (count($foundIf) == 0) {
-                    continue;
+            }
+        } else {
+            foreach ($this->data as $item) {
+                if (in_array($val, $item)) {
+                    $count++;
                 }
-
-                $rule["confidence"] = round($foundSet["supportCount"] / $foundIf["supportCount"], 2);
-
-                $this->rules->push($rule);
             }
         }
 
-        return $this->rules->where("confidence", ">=", $this->minConfidence);
+        return $count;
     }
 
-    public function findInIteration(array $needle): array
+    public function findSupport($arr): int
     {
-        $needleCount = count($needle);
+        $key = implode('-', $arr);
+        foreach ($this->table[count($arr) - 1] as $k => $v) {
+            if ($k == $key) return $v;
+        }
+        return 0;
+    }
 
-        foreach ($this->iteration[$needleCount - 1] as $item) {
-            if (count(array_diff((array) $item["idSet"], $needle)) == 0) {
-                return $item;
+    public function generateRules()
+    {
+        $tableCount = count($this->table);
+
+        foreach ($this->table[$tableCount - 1] as $item  => $suppCount) {
+            for ($i = 1; $i < $tableCount; $i++) {
+                $itemset = explode('-', $item);
+                foreach (new Combinations($itemset, $i) as $arr) {
+                    $itemsetSupp = $suppCount;
+                    $ifSupp = $this->findSupport($arr);
+
+                    if ($ifSupp == 0) continue;
+
+                    $this->rules[] = [
+                        "itemIds" => $itemset,
+                        "if" => $arr,
+                        "then" => array_diff($itemset, $arr),
+                        "confidence" => round($itemsetSupp / $ifSupp, 2)
+                    ];
+                }
             }
         }
 
-        return array();
+        // filter confidence
+        $this->filtredRules = array_filter($this->rules, function ($v) {
+            return $v["confidence"] >= $this->minConf;
+        });
     }
 }
