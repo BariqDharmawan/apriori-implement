@@ -39,7 +39,10 @@
                     @foreach ($produks as $produk)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><img src="{{ Storage::url($produk->gambar) }}" style="width: 100px; height : 100px"></td>
+                            <td>
+                                <img src="{{ Str::contains($produk->gambar, 'pixabay') ? $produk->gambar : 
+                                Storage::url($produk->gambar) }}" style="width: 100px; height : 100px">
+                            </td>
                             <td>
                                 <i class="fab fa-angular fa-lg text-danger me-3"></i>
                                 {{ $produk->nama_produk }}

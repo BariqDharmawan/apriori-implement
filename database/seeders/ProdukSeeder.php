@@ -19,7 +19,7 @@ class ProdukSeeder extends Seeder
         $produks = json_decode(File::get('public/dummy-data/products.json'));
         foreach ($produks as $produk) {
             Produk::create([
-                'gambar' => $produk->gambar,
+                'gambar' => 'https://cdn.pixabay.com/photo/2014/02/01/17/30/apple-256268_960_720.jpg',
                 'nama_produk' => $produk->nama_produk,
                 'harga' => $produk->harga
             ]);
