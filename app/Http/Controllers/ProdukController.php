@@ -36,7 +36,7 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         Produk::create([
-            'gambar' => 'https://cdn.pixabay.com/photo/2014/02/01/17/30/apple-256268_960_720.jpg',
+            'gambar' => $request->file('gambar')->store('public/files'),
             'nama_produk' => $request->nama_produk,
             'harga' => $request->harga,
         ]);
@@ -75,11 +75,16 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        $produk->update([
-            'gambar' => 'https://cdn.pixabay.com/photo/2014/02/01/17/30/apple-256268_960_720.jpg',
+        $allReq = [
             'nama_produk' => $request->nama_produk,
             'harga' => $request->harga,
-        ]);
+        ];
+
+        if ($request->has('gambar')) {
+            $allReq['gambar'] = $request->file('gambar')->store('public/files');
+        }
+
+        $produk->update($allReq);
 
         return redirect('produk');
     }

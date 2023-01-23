@@ -29,12 +29,12 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('produk', ProdukController::class)->middleware('auth');
 
-Route::get('transaksi/import', [TransaksiController::class, 'viewImport'])->name('transaksi.import.index');
-Route::post('transaksi/import', [TransaksiController::class, 'import'])->name('transaksi.import.store');
+Route::get('transaksi/import', [TransaksiController::class, 'viewImport'])->name('transaksi.import.index')->middleware('auth');
+Route::post('transaksi/import', [TransaksiController::class, 'import'])->name('transaksi.import.store')->middleware('auth');
 Route::resource('transaksi', TransaksiController::class)->middleware('auth');
 
 Route::resource('akun', UserController::class)->middleware('auth');
 Route::resource('cart', CartController::class)->middleware('auth')->except('edit', 'show');
 Route::prefix('algoritma')->name('algoritma.')->group(function () {
-    Route::get('apriori', [AlgoritmaController::class, 'apriori'])->name('apriori');
+    Route::get('apriori', [AlgoritmaController::class, 'apriori'])->name('apriori')->middleware('auth');
 });
