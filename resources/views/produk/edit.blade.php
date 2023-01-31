@@ -6,7 +6,8 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0"></h5>
                 <p><i class="text-muted">Edit Data Produk</i></p>
-                <a href="index.php"><span class="text-white float-end btn btn-primary fs-22">Kembali</span></a>
+                <a href="{{ route('produk.index') }}"><span
+                        class="float-end btn btn-primary fs-22 text-white">Kembali</span></a>
             </div>
             <div class="card-body">
 
