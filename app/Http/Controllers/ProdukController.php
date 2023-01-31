@@ -100,4 +100,10 @@ class ProdukController extends Controller
         $produk->delete();
         return redirect('produk');
     }
+
+    public function search(Request $request)
+    {
+        $produks = Produk::where('nama_produk', 'LIKE', '%' . $request->nama_produk . '%')->get();
+        return view('produk.index', ['produks' => $produks]);
+    }
 }

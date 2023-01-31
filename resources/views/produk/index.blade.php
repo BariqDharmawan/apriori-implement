@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('before-content')
-    <form action="" method="POST">
+    <form action="{{ route('produk.search') }}" method="GET">
         <div class="container-xxl container-p-y">
             <div class="row">
                 <div class="col-4">
                     <input type="text" name="nama_produk" class="form-control mb-2 border-2"
-                        placeholder="Cari Nama Produk..." />
+                        placeholder="Cari Nama Produk..." value="{{ request('nama_produk') }}" />
                 </div>
                 <div class="col-6">
                     <button type="submit" class="btn btn-primary" name="search">Cari</button>
