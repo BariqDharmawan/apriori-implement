@@ -22,7 +22,7 @@
         <h5 class="card-header bg-primary text-white">Transaction</h5>
 
         <div class="table-responsive" style="box-shadow: 0 0 4px  gray;">
-            <table class="table table-hover">
+            <table class="table-hover table">
                 <thead>
                     <tr>
                         <th>Nomor</th>
@@ -33,7 +33,14 @@
                     @foreach ($stepByStep['transactions'] as $transaction)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ implode(',', $transaction) }}</td>
+                            @php
+                                $getProduks = \App\Models\Produk::whereIn('id', $transaction)
+                                    ->get()
+                                    ->toArray();
+                            @endphp
+                            @foreach ($getProduks as $item)
+                                <td>{{ $item['nama_produk'] . (!$loop->last ? ',' : '') }}</td>
+                            @endforeach
                         </tr>
                     @endforeach
                 </tbody>
@@ -45,7 +52,7 @@
         <h5 class="card-header bg-primary text-white">Produk</h5>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table-hover table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -69,13 +76,14 @@
 
     <div class="card mb-4">
         <h5 class="card-header bg-primary text-white">Iteration</h5>
+
         <div class="card-body">
             @foreach ($stepByStep['iteration'] as $iterate)
                 <div class="row">
                     <div class="col border-end border-primary">
                         <h5>Iteration {{ $loop->iteration }}: Frequent Items</h5>
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table-hover table">
                                 <thead>
                                     <tr>
                                         <th>Produk ID</th>
@@ -85,8 +93,18 @@
                                 <tbody class="table-border-bottom-0">
                                     @foreach ($iterate['frequentItems'] as $key => $frequentItems)
                                         <tr>
-                                            <td>{{ str_replace('-', ',', (string) $key) }}</td>
-                                            <td>{{ $frequentItems }}</td>
+                                            <td>
+                                                @php
+                                                    $arrProd = explode('-', $key);
+                                                @endphp
+                                                @foreach ($arrProd as $prod)
+                                                    <a href="{{ route('produk.show', $prod) }}">{{ $prod }}</a>
+                                                    {{ !$loop->last ? ', ' : '' }}
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                {{ number_format((float) (($frequentItems / count($stepByStep['transactions'])) * 100), 2, '.', '') }}%
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -96,7 +114,7 @@
                     <div class="col">
                         <h5>Iteration {{ $loop->iteration }}: filtered FrequentItems</h5>
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table-hover table">
                                 <thead>
                                     <tr>
                                         <th>Produk ID</th>
@@ -107,7 +125,9 @@
                                     @foreach ($iterate['filteredFrequentItems'] as $key => $filteredFrequentItems)
                                         <tr>
                                             <td>{{ str_replace('-', ',', (string) $key) }}</td>
-                                            <td>{{ $filteredFrequentItems }}</td>
+                                            <td>
+                                                {{ number_format((float) (($filteredFrequentItems / count($stepByStep['transactions'])) * 100), 2, '.', '') }}%
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -124,7 +144,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table-hover table">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -153,7 +173,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table-hover table">
                     <thead>
                         <tr>
                             <th>No</th>

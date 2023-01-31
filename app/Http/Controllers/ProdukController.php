@@ -52,7 +52,7 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-        //
+        return view('produk.show', compact('produk'));
     }
 
     /**
