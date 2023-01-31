@@ -48,11 +48,11 @@
                                 {{ $produk->nama_produk }}
                             </td>
                             <td class="text-end">
+                                <span>Rp. {{ number_format($produk['harga'], 0, ',', '.') }}</span>
+                                <a class="btn btn-primary m-2" href="{{ route('produk.edit', $produk->id) }}">
+                                    <i class="bx bx-edit-alt me-1 text-white"></i>
+                                </a>
                                 @if (auth()->user()->role === 'admin')
-                                    <span>Rp. {{ number_format($produk['harga'], 0, ',', '.') }}</span>
-                                    <a class="btn btn-primary m-2" href="{{ route('produk.edit', $produk->id) }}">
-                                        <i class="bx bx-edit-alt me-1 text-white"></i>
-                                    </a>
                                     <form method="POST" action="{{ route('produk.destroy', $produk->id) }}"
                                         onsubmit="return confirm('Yakin ingin menghapus' . $produk['nama_produk'] . '?')">
                                         @csrf @method('DELETE')
@@ -60,21 +60,8 @@
                                             <i class="bx bx-trash me-1 text-white"></i>
                                         </button>
                                     </form>
-                                @else
-                                    <p>
-                                        <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                        Rp {{ number_format($produk->harga, 0) }}
-                                    </p>
-                                    <form action="{{ route('cart.store') }}" method="post">
-                                        @csrf
-                                        <input type="number" placeholder="QTY" min="1" name="qty" value="1"
-                                            required>
-                                        <button type="submit" name="produks_id" value="{{ $produk->id }}"
-                                            class="btn btn-success">
-                                            Add to cart
-                                        </button>
-                                    </form>
                                 @endif
+
                             </td>
                         </tr>
                     @endforeach

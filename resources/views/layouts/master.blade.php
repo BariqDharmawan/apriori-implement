@@ -79,7 +79,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme pt-4">
 
-                <h3 class="text-center text-dark fw-bold text-primary">skripsi.</h3>
+                <h3 class="text-dark fw-bold text-primary text-center">skripsi.</h3>
 
                 <ul class="menu-inner py-1">
 
@@ -101,6 +101,11 @@
                             <li class="menu-item">
                                 <a href="{{ route('produk.index') }}" class="menu-link">
                                     <div data-i18n="Account">Produk</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('algoritma.apriori') }}" class="menu-link">
+                                    <div>Lihat Apriori</div>
                                 </a>
                             </li>
                             @if (auth()->user()->role === 'admin')
@@ -132,7 +137,7 @@
                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
                     id="layout-navbar">
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <ul class="navbar-nav align-items-center ms-auto flex-row">
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow fw-bold" href="javascript:void(0);"
