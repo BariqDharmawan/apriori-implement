@@ -6,8 +6,9 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0"></h5>
                 <p><i class="text-muted">Edit Data User</i></p>
-                <a href="{{ route('akun.index') }}"><span
-                        class="float-end btn btn-primary fs-22 text-white">Kembali</span></a>
+                <a href="{{ route('akun.index') }}">
+                    <span class="float-end btn btn-primary fs-22 text-white">Kembali</span>
+                </a>
             </div>
             <div class="card-body">
 

@@ -5,7 +5,7 @@
         <div class="container-xxl container-p-y">
             <div class="row">
                 <div class="col-4">
-                    <input type="text" name="nama_produk" class="form-control border-2 mb-2"
+                    <input type="text" name="nama_produk" class="form-control mb-2 border-2"
                         placeholder="Cari Nama Produk..." />
                 </div>
                 <div class="col-6">
@@ -26,7 +26,7 @@
     <div class="card">
         <h5 class="card-header bg-primary text-white">Data Produk</h5>
         <div class="table-responsive" style="box-shadow: 0 0 4px  gray;">
-            <table class="table table-hover">
+            <table class="table-hover table">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -40,8 +40,8 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
-                                <img src="{{ Str::contains($produk->gambar, 'pixabay') ? $produk->gambar : 
-                                Storage::url($produk->gambar) }}" style="width: 100px; height : 100px">
+                                <img src="{{ Str::contains($produk->gambar, 'pixabay') ? $produk->gambar : Storage::url($produk->gambar) }}"
+                                    style="width: 100px; height : 100px">
                             </td>
                             <td>
                                 <i class="fab fa-angular fa-lg text-danger me-3"></i>
@@ -49,6 +49,7 @@
                             </td>
                             <td class="text-end">
                                 @if (auth()->user()->role === 'admin')
+                                    <span>Rp. {{ number_format($produk['harga'], 0, ',', '.') }}</span>
                                     <a class="btn btn-primary m-2" href="{{ route('produk.edit', $produk->id) }}">
                                         <i class="bx bx-edit-alt me-1 text-white"></i>
                                     </a>
