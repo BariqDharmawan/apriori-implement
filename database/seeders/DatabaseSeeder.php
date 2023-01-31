@@ -39,7 +39,8 @@ class DatabaseSeeder extends Seeder
             ProdukSeeder::class,
             TransaksiSeeder::class,
             TransaksiItemSeeder::class,
-            CartSeeder::class
+            CartSeeder::class,
+            StaticVarSeeder::class
         ]);
     }
 }

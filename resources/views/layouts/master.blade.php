@@ -110,6 +110,11 @@
                             </li>
                             @if (auth()->user()->role === 'admin')
                                 <li class="menu-item">
+                                    <a href="{{ route('edit-confidence.index') }}" class="menu-link">
+                                        <div>Ubah minconfidence</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
                                     <a href="{{ route('transaksi.index') }}" class="menu-link">
                                         <div data-i18n="Notifications">Transaksi</div>
                                     </a>

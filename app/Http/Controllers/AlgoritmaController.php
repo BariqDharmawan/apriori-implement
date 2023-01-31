@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Lib\Apriori;
 use App\Models\Produk;
+use App\Models\StaticVar;
 use App\Models\TransaksiItem;
 
 class AlgoritmaController extends Controller
 {
     public function apriori()
     {
-        $apriori = new Apriori(1, 0.1);
+        $apriori = new Apriori(1, StaticVar::first()->min_confidence);
         $apriori->importData(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->iterate();
 
