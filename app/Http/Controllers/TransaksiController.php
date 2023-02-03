@@ -16,9 +16,15 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $transaksi = Transaksi::with('transaksiItems')->latest()->get();
+        if ($request->has('start_date') and $request->has('end_date')) {
+            $transaksi = Transaksi::with('transaksiItems')->whereBetween('tgl_transaksi', [$request->start_date, $request->end_date])->get();
+        } else {
+            $transaksi = Transaksi::with('transaksiItems')->latest()->get();
+        }
+        $transaksi = $transaksi->groupBy('tgl_transaksi');
+        // dd($transaksi->count(), $transaksi);
         $produks = Produk::all();
         return view('transaksi.index', ['transaksi' => $transaksi, 'produks' => $produks]);
     }
@@ -42,15 +48,17 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $transaksi = Transaksi::create([
             'tgl_transaksi' => $request->tgl_transaksi
         ]);
-
-        TransaksiItem::create([
-            'jumlah_produk' => $request->jumlah_produk,
-            'produks_id' => $request->produks_id,
-            'transaksis_id' => $transaksi->id
-        ]);
+        foreach ($request->produks_id as $pid) {
+            TransaksiItem::create([
+                'jumlah_produk' => 1,
+                'produks_id' => $pid,
+                'transaksis_id' => $transaksi->id
+            ]);
+        }
 
         return redirect('transaksi');
     }
