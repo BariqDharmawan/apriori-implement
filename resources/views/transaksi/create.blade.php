@@ -15,7 +15,7 @@
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">ID Produk</label>
-                        <select name="produks_id" class="form-control">
+                        <select name="produks_id[]" class="form-control" multiple>
                             @foreach ($produk as $pd)
                                 <option value="{{ $pd['id'] }}">
                                     {{ $pd['id'] }} ({{ $pd['nama_produk'] }})
@@ -24,12 +24,12 @@
                         </select>
                     </div>
 
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Jumlah Produk</label>
                         <div class="col-sm-10">
                             <input type="number" class="form-control" name="jumlah_produk" required>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Tanggal Transaksi</label>
