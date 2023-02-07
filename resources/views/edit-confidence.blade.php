@@ -9,7 +9,7 @@
     <form action="{{ route('edit-confidence.update') }}" method="POST">
         @csrf @method('PUT')
         <input type="number" class="form-control" name="min_confidence" value="{{ $staticVar->min_confidence }}"
-            placeholder="min confidence" max="1" min="0.0" step="0.1" required>
+            placeholder="min confidence" max="1" min="0.0" required>
         <button type="submit" class="btn btn-primary mt-3">Change</button>
     </form>
 @endsection
