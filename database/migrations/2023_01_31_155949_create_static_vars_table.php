@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('static_vars', function (Blueprint $table) {
             $table->id();
+            $table->string('min_support');
             $table->string('min_confidence');
             $table->timestamps();
         });

@@ -110,8 +110,8 @@
                             </li>
                             @if (auth()->user()->role === 'admin')
                                 <li class="menu-item">
-                                    <a href="{{ route('edit-confidence.index') }}" class="menu-link">
-                                        <div>Ubah minconfidence</div>
+                                    <a href="{{ route('edit-var.index') }}" class="menu-link">
+                                        <div>Ubah confidence dan support</div>
                                     </a>
                                 </li>
                                 <li class="menu-item">

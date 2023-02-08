@@ -33,14 +33,15 @@ Route::prefix('algoritma')->name('algoritma.')->group(function () {
 
 Route::put('update-confidence', function (Request $request) {
     StaticVar::first()->update([
-        'min_confidence' => $request->min_confidence
+        'min_confidence' => $request->min_confidence,
+        'min_support' => $request->min_support
     ]);
 
     return redirect()->route('transaksi.index');
-})->name('edit-confidence.update');
+})->name('edit-var.update');
 
 Route::get('edit-confidence', function () {
     $staticVar = StaticVar::first();
 
     return view('edit-confidence', ['staticVar' => $staticVar]);
-})->name('edit-confidence.index');
+})->name('edit-var.index');

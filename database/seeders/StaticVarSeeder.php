@@ -16,7 +16,8 @@ class StaticVarSeeder extends Seeder
     public function run()
     {
         StaticVar::create([
-            'min_confidence' => 0.1
+            'min_confidence' => 0.1,
+            'min_support' => 1
         ]);
     }
 }

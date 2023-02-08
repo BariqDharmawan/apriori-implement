@@ -9,5 +9,5 @@ class StaticVar extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['min_confidence'];
+    protected $fillable = ['min_confidence', 'min_support'];
 }

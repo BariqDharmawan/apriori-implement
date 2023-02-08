@@ -11,7 +11,9 @@ class AlgoritmaController extends Controller
 {
     public function apriori()
     {
-        $apriori = new Apriori(1, StaticVar::first()->min_confidence);
+        $staticVar = StaticVar::first();
+
+        $apriori = new Apriori($staticVar->min_support, StaticVar::first()->min_confidence);
         $apriori->importData(TransaksiItem::get()->groupBy("transaksis_id"));
         $apriori->iterate();
 
