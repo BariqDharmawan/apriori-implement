@@ -18,8 +18,7 @@
         <div>
             <label for="min_support">Min Support</label>
             <input type="number" class="form-control" id="min_support" name="min_support"
-                value="{{ $staticVar->min_support }}" placeholder="min confidence" max="1" min="0.0"
-                step="0.01" required>
+                value="{{ $staticVar->min_support }}" placeholder="min confidence" step="0.01" required>
             <button type="submit" class="btn btn-primary mt-3">Change</button>
         </div>
     </form>
